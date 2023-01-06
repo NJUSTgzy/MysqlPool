@@ -1,0 +1,11 @@
+{
+  "ip": "localhost",
+  "port": 3306,
+  "user": "root",
+  "pwd": "11111111",
+  "dbName": "test",
+  "minSize": 32,
+  "maxSize": 128,
+  "maxWaitTime": 3000,
+  "timeOut": 1000
+}
