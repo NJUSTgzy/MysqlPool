@@ -45,7 +45,7 @@ bool SqlPool::pasreJson() {
         sqlPwd = root["pwd"].asString();
         sqlUser = root["user"].asString();
         maxSize = root["maxSize"].asInt();
-        minSize = root["minSiaze"].asInt();
+        minSize = root["minSize"].asInt();
         maxWaitTime = root["maxWaitTime"].asInt();
         timeOut = root["timeOut"].asInt();
 
@@ -65,9 +65,7 @@ void SqlPool::CreateSqlConnection(){
 void SqlPool::produceConnection() {
 
     while (1){
-
         unique_lock<mutex> locker(mutexQueue);
-
         while (sqlConnectionsQueue.size()>=minSize){
             cond.wait(locker);
         }
@@ -99,7 +97,7 @@ shared_ptr<MysqlConnection> SqlPool::getConnection() {
 
     unique_lock<mutex> locker(mutexQueue);
     while (sqlConnectionsQueue.empty()){
-        if(cv_status::timeout==cond.wait_for(locker,chrono::milliseconds(timeOut)));{
+        if(cv_status::timeout==cond.wait_for(locker,chrono::milliseconds(timeOut))){
             if(sqlConnectionsQueue.empty()){
                 continue;
             }

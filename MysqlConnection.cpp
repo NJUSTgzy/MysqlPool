@@ -32,7 +32,6 @@ int MysqlConnection::update(string sql) {
 int MysqlConnection::query(string sql) {
     freeRes();
     int res = mysql_query(sqlConn,sql.c_str());
-    cout<<"query res:"<<res<<"   query sql:"<<sql<<endl;
     if(res==0){
         return 0;
     }
